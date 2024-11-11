@@ -41,7 +41,7 @@ Para rodar o projeto localmente, siga os passos abaixo:
    yarn install
 Ou npm:
 
-    ```bash
+ 
     npm install
 
 4. Copiar código
