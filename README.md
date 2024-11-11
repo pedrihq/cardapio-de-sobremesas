@@ -36,25 +36,16 @@ Para rodar o projeto localmente, siga os passos abaixo:
    cd cardapio-sobremesas
 
 
-3. Instale as dependências: Se você estiver usando Yarn:
-   ```bash
-   yarn install
-Ou npm:
+3. Instale as dependências: 
+   ```sh
+      npm install
+   ```
+4. Rode a aplicação
 
- 
-    npm install
+  ```sh
+      npm run dev
+   ```
 
-4. Copiar código
-   ```bash
-   npm install
-Inicie o servidor de desenvolvimento: Se você estiver usando Yarn:
+5. Acesse http://localhost:3000 para acessar o app.
 
-Copiar código
 
-    yarn dev
-Ou npm:
-
-    npm run dev
-
-5. Copiar código
-Acesse o projeto no navegador pelo endereço http://localhost:3000.
