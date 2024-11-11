@@ -1,6 +1,6 @@
 # Cardápio de Sobremesas
 
-Este é um projeto de estudo de um cardápio de sobremesas, desenvolvido com **Next.js**, **Tailwind CSS** e a biblioteca **Lucide** para ícones. O objetivo é criar uma interface interativa para exibir diferentes opções de sobremesas, com uma interface simples e responsiva.
+Este é um projeto de estudo de um cardápio de sobremesas, desenvolvido com **Next.js**, **Tailwind CSS** e a biblioteca **Lucide** para ícones. O objetivo é criar uma interface interativa para exibir diferentes opções de sobremesas, com uma interface simples.
 
 ![cardapio-de-sobremesa-img](https://github.com/user-attachments/assets/d7c0cf11-9c2f-4704-ae33-dec08560532f)
 
