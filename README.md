@@ -1,36 +1,52 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Cardápio de Sobremesas
 
-## Getting Started
+Este é um projeto de estudo de um cardápio de sobremesas, desenvolvido com **Next.js**, **Tailwind CSS** e a biblioteca **Lucide** para ícones. O objetivo é criar uma interface interativa para exibir diferentes opções de sobremesas, com uma interface simples e responsiva.
 
-First, run the development server:
+![cardapio-de-sobremesa-img](https://github.com/user-attachments/assets/d7c0cf11-9c2f-4704-ae33-dec08560532f)
 
-```bash
-npm run dev
-# or
+
+## Sobre o Projeto
+
+Este cardápio de sobremesas foi desenvolvido como um exercício para aprender a integrar o **Next.js** com o **Tailwind CSS**, além de utilizar a biblioteca **Lucide** para ícones. A aplicação permite aos usuários visualizar diferentes sobremesas com imagens e descrições, simulando um processo de compra de sobremesas.
+
+## Funcionalidades
+
+- Exibição de uma lista de sobremesas com imagens e descrições.
+- Cartão interativo para adicionar ou remover sobremesas.
+- Interface responsiva para uso em dispositivos móveis e desktop.
+- Ícones para interatividade (usando Lucide).
+
+## Como Rodar o Projeto
+
+Para rodar o projeto localmente, siga os passos abaixo:
+
+### Pré-requisitos
+
+- Ter o [Node.js](https://nodejs.org/) instalado (recomendado para rodar um servidor de desenvolvimento local).
+
+### Passo a Passo
+
+1. Clone o repositório para sua máquina:
+   ```bash
+   git clone https://github.com/seu-usuario/cardapio-sobremesas.git
+Acesse a pasta do projeto:
+
+2. Copiar código
+cd cardapio-sobremesas
+Instale as dependências: Se você estiver usando Yarn:
+
+3. Copiar código
+yarn install
+Ou npm:
+
+4. Copiar código
+npm install
+Inicie o servidor de desenvolvimento: Se você estiver usando Yarn:
+
+Copiar código
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Ou npm:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+5. Copiar código
+npm run dev
+Acesse o projeto no navegador pelo endereço http://localhost:3000.
