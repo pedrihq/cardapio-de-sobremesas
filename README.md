@@ -29,24 +29,32 @@ Para rodar o projeto localmente, siga os passos abaixo:
 1. Clone o repositório para sua máquina:
    ```bash
    git clone https://github.com/seu-usuario/cardapio-sobremesas.git
-Acesse a pasta do projeto:
 
-2. Copiar código
-cd cardapio-sobremesas
-Instale as dependências: Se você estiver usando Yarn:
+   
+2. Acesse a pasta do projeto:
+   ```bash
+   cd cardapio-sobremesas
 
-3. Copiar código
-yarn install
+
+3. Instale as dependências: Se você estiver usando Yarn:
+   ```bash
+   yarn install
 Ou npm:
 
+    ```bash
+    npm install
+
 4. Copiar código
-npm install
+   ```bash
+   npm install
 Inicie o servidor de desenvolvimento: Se você estiver usando Yarn:
 
 Copiar código
-yarn dev
+
+    yarn dev
 Ou npm:
 
+    npm run dev
+
 5. Copiar código
-npm run dev
 Acesse o projeto no navegador pelo endereço http://localhost:3000.
