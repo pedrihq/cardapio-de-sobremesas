@@ -1,101 +1,214 @@
+"use client";
 import Image from "next/image";
+import "./globals.css";
+import { useEffect, useState } from "react";
+import CarrinhoComponent from "./_components/CarrinhoComponent";
+import { currency } from "./_utils/Currency";
+import PedidoConfirm from "./_components/PedidoConfirmComponent";
 
+export type Sobremesas = {
+  img: string;
+  tipo: string;
+  nome: string;
+  preco: number;
+  id: number;
+};
+type Carrinho = {
+  quantidade: number;
+  item: Sobremesas;
+};
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const sobremesa: Sobremesas[] = [
+    {
+      img: "/img/image-baklava-desktop.jpg",
+      tipo: "Waffle",
+      nome: "Waffle com frutas vermelhas",
+      preco: 15.5,
+      id: 1,
+    },
+    {
+      img: "/img/image-creme-brulee-desktop.jpg",
+      tipo: "Creme Brûlée",
+      nome: "Creme Brûlée de Vanilla Bean",
+      preco: 12.34,
+      id: 2,
+    },
+    {
+      img: "/img/image-macaron-desktop.jpg",
+      tipo: "Macaron",
+      nome: "Macaron Mistura de Cinco",
+      preco: 10.5,
+      id: 3,
+    },
+    {
+      img: "/img/image-tiramisu-desktop.jpg",
+      tipo: "Tiramisu",
+      nome: "Tiramisu Clássico",
+      preco: 16,
+      id: 4,
+    },
+    {
+      img: "/img/image-baklava-desktop.jpg",
+      tipo: "Waffle",
+      nome: "Waffle com frutas vermelhas",
+      preco: 13,
+      id: 5,
+    },
+    {
+      img: "/img/image-meringue-desktop.jpg",
+      tipo: "Torta",
+      nome: "Torta De Limão Com Merengue",
+      preco: 18.55,
+      id: 6,
+    },
+    {
+      img: "/img/image-cake-desktop.jpg",
+      tipo: "Bolo",
+      nome: "Bolo De Veludo Vermelho",
+      preco: 10.9,
+      id: 7,
+    },
+    {
+      img: "/img/image-brownie-desktop.jpg",
+      tipo: "Brownie",
+      nome: "Brownie de Caramelo Salgado",
+      preco: 10.2,
+      id: 8,
+    },
+    {
+      img: "/img/image-panna-cotta-desktop.jpg",
+      tipo: "Panna Cotta",
+      nome: "Panna cotta de baunilha",
+      preco: 5.5,
+      id: 9,
+    },
+  ];
+  const [carrinho, setCarrinho] = useState<Carrinho[]>([]);
+  const [carrinhoConfirmada, setCarrinhoConfirmada] = useState(false)
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  useEffect(() => {
+    console.log(carrinho);
+  }, [carrinho]);
+
+  function addCarrinho(item: Sobremesas) {
+    setCarrinho((estado) => [...estado, { quantidade: 1, item }]);
+  }
+
+  function verificaCarrinho(id: number) {
+    const posicao = carrinho.findIndex((item) => {
+      return item.item.id == id;
+    });
+    if (posicao !== -1) {
+      return true;
+    }
+    return false;
+  }
+
+  function removerItemCarrinho(id: number){
+   return setCarrinho((estado) => estado.filter((item) => item.item.id !== id))
+  }
+  function atualizaCarrinho(id: number, func: "soma" | "subtrai") {
+    const itemSobremesa = pegaItemCarrinho(id);
+    if (itemSobremesa) {
+      if (func == "soma") itemSobremesa.quantidade += 1;
+      else itemSobremesa.quantidade -= 1;
+
+      if(itemSobremesa.quantidade === 0){
+       return removerItemCarrinho(id)
+      }
+
+      setCarrinho((estado) => {
+        const itensCarrinho = estado.filter(
+          (carrinho) => carrinho.item.id !== id
+        );
+        return [...itensCarrinho, itemSobremesa!];
+      });
+    }
+  }
+
+  function botaoConfimaPedido(){
+    setCarrinhoConfirmada(true)
+  }
+  function novoPedido(){
+    setCarrinhoConfirmada(false)
+    setCarrinho([])
+  }
+  const pegaItemCarrinho = (id: number) =>
+    carrinho.find((carrinho) => carrinho.item.id === id);
+
+
+  return (
+    <main className={`h-screen font-fontPrincipal ${carrinhoConfirmada ? 'overflow-hidden' : ''}`}>
+      <h1 className="mt-10 mb-10 font-semibold text-3xl">Sobremesas</h1>
+      <div className="flex gap-10">
+        <div className="h-screen max-w-full">
+          <div className="pb-16 grid grid-cols-3 gap-y-20 gap-x-10">
+            {sobremesa.map((sobremesa: Sobremesas) => {
+              return (
+                <div key={sobremesa.id} className="w-52 flex flex-col">
+                  <Image
+                    src={sobremesa.img}
+                    alt="Imagem da sobremesa"
+                    height={200}
+                    width={300}
+                    className={`rounded-2xl ease-in-ou transition duration-500 border-2 ${verificaCarrinho(sobremesa.id) ? 'border-orange-700' : 'border-transparent'}`}
+                  />
+                  {verificaCarrinho(sobremesa.id) === true ? (
+                    <div className="w-40 h-14 p-3 gap-5 border border-orange-700 rounded-full relative top-[-25px] left-7 flex items-center justify-center ease-in-ou transition duration-500 text-xl text-white bg-orange-700">
+                      <button
+                        onClick={() =>
+                          atualizaCarrinho(sobremesa.id, "subtrai") 
+                        }
+                        disabled={
+                          !pegaItemCarrinho(sobremesa.id) ||
+                          pegaItemCarrinho(sobremesa.id)!.quantidade <= 0
+                        }
+                        className="rounded-full border-2 border-white w-8 text-center"
+                      >
+                        -
+                      </button>
+                      <p>{pegaItemCarrinho(sobremesa.id)?.quantidade}</p>
+                      <button
+                        onClick={() => atualizaCarrinho(sobremesa.id, "soma")}
+                        className="rounded-full border-2 border-white w-8 text-center"
+                      >
+                        +
+                      </button>
+                    </div>
+                  ) : (
+                    <button
+                      onClick={() => addCarrinho(sobremesa)}
+                      className="w-40 h-14 p-3 border border-black rounded-full relative top-[-25px] left-7 flex items-center justify-center ease-in-ou transition duration-500 gap-1 text-sm bg-white hover:border-orange-700"
+                    >
+                      <Image
+                        src="/img/icon-add-to-cart.svg"
+                        alt="Imagem da sobremesa"
+                        height={20}
+                        width={20}
+                        className=""
+                      />
+                      Add carrinho
+                    </button>
+                  )}
+                  <div className="top-96">
+                    <p className="text-neutral-400 font-light">
+                      {sobremesa.tipo}
+                    </p>
+                    <h1 className="text-black font-medium text-2xl break-words">
+                      {sobremesa.nome}
+                    </h1>
+                    <p className="text-orange-500 font-bold">
+                      {currency.format(sobremesa.preco)}
+                    </p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+        <CarrinhoComponent carrinho={carrinho} removerItem={removerItemCarrinho} confirmaPedido={botaoConfimaPedido}/>
+      </div>
+      {carrinhoConfirmada && <PedidoConfirm novoPedido={novoPedido} carrinho={carrinho}/>}
+    </main>
   );
 }
